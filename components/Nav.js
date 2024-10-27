@@ -1,8 +1,12 @@
 import Link from "next/link";
+import {useRouter} from "next/router";
+import { useSession } from "next-auth/react";
 
 export default function Nav() {
     const inactiveLink = 'flex gap-1 p-1';
     const activeLink = inactiveLink+' bg-white text-blue-900 rounded-l-lg';
+    const router = useRouter();
+    const {pathname} = router;
     return (
 
     <aside className="text-white p-4 pr-0">
@@ -16,7 +20,7 @@ export default function Nav() {
                   EcommerceAdmin </span>
         </Link>
 <nav className="flex flex-col gap-2">
-    <Link href={'/'} className={activeLink}>
+    <Link href={'/'} className={pathname === '/' ? activeLink: inactiveLink }>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
              className="size-6">
             <path strokeLinecap="round" strokeLinejoin="round"
@@ -24,7 +28,7 @@ export default function Nav() {
         </svg>
 
         Dashboard </Link>
-    <Link href={'/products'} className={inactiveLink}>
+    <Link href={'/products'} className={pathname.includes('/products') ? activeLink : inactiveLink}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
              className="size-6">
             <path strokeLinecap="round" strokeLinejoin="round"
@@ -32,7 +36,7 @@ export default function Nav() {
         </svg>
 
         Products </Link>
-    <Link href={'/orders'} className={inactiveLink}>
+    <Link href={'/orders'} className={pathname.includes('/orders') ? activeLink : inactiveLink}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
              className="size-6">
             <path strokeLinecap="round" strokeLinejoin="round"
@@ -41,7 +45,7 @@ export default function Nav() {
 
 
         Orders </Link >
-    <Link href={'/settings'} className={inactiveLink}>
+    <Link href={'/settings'} className={pathname.includes('/settings') ? activeLink : inactiveLink}>
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
          className="size-6">
         <path strokeLinecap="round" strokeLinejoin="round"
